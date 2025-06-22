@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Animation - Du Lịch Huế</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6) fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .loading-logo {
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInLogo 1s ease forwards;
+        }
+
+        .loading-spinner {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 30px;
+            perspective: 1000px;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate-cube 8s infinite linear;
+        }
+
+        .face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            /* background: rgba(255, 255, 255, 0.2); */
+            border: 1px solid white;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 5px #000;
+        }
+
+        .front  { transform: rotateY(  0deg) translateZ(50px); background: rgba(255, 99, 71, 0.7); }
+        .back   { transform: rotateY(180deg) translateZ(50px); background: rgba(30, 144, 255, 0.7); }
+        .right  { transform: rotateY( 90deg) translateZ(50px); background: rgba(60, 179, 113, 0.7); }
+        .left   { transform: rotateY(-90deg) translateZ(50px); background: rgba(255, 215, 0, 0.7); }
+        .top    { transform: rotateX( 90deg) translateZ(50px); background: rgba(218, 112, 214, 0.7); }
+        .bottom { transform: rotateX(-90deg) translateZ(50px); background: rgba(176, 224, 230, 0.7); }
+
+        @keyframes rotate-cube {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.5s ease;
+            min-height: 36px;
+            margin-bottom: 10px;
+        }
+
+        .loading-progress {
+            width: 300px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(to right, #6c5ce7, #fd79a8);
+            animation: progress 3s ease-in-out forwards;
+        }
+
+        .liquid-drops {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .drop {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: dropAnimation 4s ease-in-out infinite;
+        }
+
+        .drop:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .drop:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            right: 20%;
+            top: 30%;
+            animation-delay: 1s;
+        }
+
+        .drop:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            left: 30%;
+            bottom: 20%;
+            animation-delay: 2s;
+        }
+
+        .drop:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            right: 15%;
+            bottom: 30%;
+            animation-delay: 3s;
+        }
+
+        .drop:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            left: 50%;
+            top: 15%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes dropAnimation {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes fadeInLogo {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes progress {
+            0% { width: 0; }
+            10% { width: 10%; }
+            30% { width: 40%; }
+            50% { width: 60%; }
+            70% { width: 75%; }
+            90% { width: 90%; }
+            100% { width: 100%; }
+        }
+
+        .enter-site {
+            margin-top: 40px;
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: linear-gradient(to right, #6c5ce7, #fd79a8);
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeInButton 0.5s ease forwards 3s;
+        }
+
+        .enter-site:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes fadeInButton {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="liquid-drops">
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+    </div>
+
+    <div class="loading-container">
+        <div class="loading-logo">HUẾ</div>
+        <div class="loading-spinner">
+            <div class="cube">
+                <div class="face front">H</div>
+                <div class="face back">U</div>
+                <div class="face right">Ế</div>
+                <div class="face left">D</div>
+                <div class="face top">L</div>
+                <div class="face bottom">!</div>
+            </div>
+        </div>
+        <div class="loading-text">Đang Khám Phá Vẻ Đẹp Cố Đô...</div>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+        </div>
+        <button class="enter-site" onclick="location.href='index.html'">Vào Trang Web</button>
+    </div>
+
+    <script>
+        // Simulate loading time
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingText = document.querySelector('.loading-text');
+            const texts = [
+                "Đang Khám Phá Vẻ Đẹp Cố Đô...",
+                "Đang Tìm Kiếm Ẩm Thực Huế...",
+                "Đang Lắng Nghe Nhã Nhạc Cung Đình...",
+                "Sẵn Sàng Để Khám Phá!"
+            ];
+            
+            let currentText = 0;
+            
+            // Change loading text periodically
+            const textInterval = setInterval(() => {
+                currentText = (currentText + 1) % texts.length;
+                
+                // Hiệu ứng fade out
+                loadingText.style.opacity = 0;
+                
+                // Đợi hiệu ứng fade out hoàn thành rồi đổi nội dung
+                setTimeout(() => {
+                    loadingText.textContent = texts[currentText];
+                    // Hiệu ứng fade in
+                    loadingText.style.opacity = 1;
+                }, 500);
+            }, 2000);
+            
+            // Không cần clear interval vì đây là demo
+        });
+    </script>
+</body>
+</html> 

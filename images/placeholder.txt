@@ -1,0 +1,17 @@
+Place the following images in this folder to complete the website:
+
+1. hue-panorama.jpg - Panoramic view of Hue city (for hero section background)
+2. imperial-citadel.jpg - Image of Hue Imperial Citadel
+3. thien-mu-pagoda.jpg - Image of Thien Mu Pagoda
+4. tomb-minh-mang.jpg - Image of Minh Mang Tomb
+5. bun-bo-hue.jpg - Image of Bun Bo Hue dish
+6. banh-khoai.jpg - Image of Banh Khoai dish
+7. che-hue.jpg - Image of Hue-style dessert
+8. gallery1.jpg through gallery6.jpg - Various beautiful images of Hue
+
+Image size recommendations:
+- Hero image: 1920x1080px or larger
+- Card images: 800x600px
+- Gallery images: 800x800px
+
+For best results, use high-quality images that showcase the beauty of Hue's landmarks and cuisine. 
