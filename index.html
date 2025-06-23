@@ -3,434 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#74ebd5">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Khám Phá Huế - Thành Phố Di Sản</title>
+    <title>ALI STUDIO - Bảo Trì Hệ Thống</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/fixed-nav.css">
-    <link rel="stylesheet" href="css/loading.css">
-    <link rel="stylesheet" href="css/chatbox.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* Additional styles for YouTube iframe */
-        iframe#youtube-player {
-            width: 150vw !important;
-            height: 150vh !important;
-            min-width: 150vw !important;
-            min-height: 150vh !important;
-            object-fit: cover !important;
-            position: absolute !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) scale(1.5) !important;
-            filter: brightness(1.3) contrast(1.15) saturate(1.1) !important;
-        }
-        
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .video-overlay {
-            background: rgba(0, 0, 0, 0.15) !important;
-        }
-        
-        /* Direct embed fallback */
-        .direct-embed {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-        
-        .direct-embed iframe {
-            width: 150% !important;
-            height: 150% !important;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1.0);
-            border: none;
-            pointer-events: none;
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Preload audio để tăng khả năng tự động phát -->
+    <link rel="preload" href="audio/background-music.mp3" as="audio">
+    <!-- Thêm meta tag để cho phép tự động phát media -->
+    <meta name="autoplay-policy" content="no-user-gesture-required">
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="wave-container">
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-    </div>
-    
-    <div class="bubbles">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-    </div>
-
-    <!-- Loading Screen -->
-    <div class="loader-wrapper">
-        <div class="loading-logo">HUẾ</div>
-        <div class="loading-text">Đang Khám Phá Vẻ Đẹp Cố Đô...</div>
-        <div class="loading-progress">
-            <div class="progress-bar"></div>
+    <div id="preloader">
+        <div class="loader-text">ALI STUDIO</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
         </div>
+        <div class="loader-subtext">Đang tải tài nguyên...</div>
+        <button id="enter-button" class="enter-btn hidden">Truy Cập</button>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-container">
-        <!-- Header & Navigation -->
-        <header>
-            <div class="logo">
-                <a href="#hero">
-                    <h1>DU LỊCH HUẾ</h1>
-                </a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#hero" class="active">Trang Chủ</a></li>
-                    <li><a href="#destinations">Điểm Đến</a></li>
-                    <li><a href="#cuisine">Ẩm Thực</a></li>
-                    <li><a href="#culture">Văn Hóa</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </header>
-
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <div class="video-background">
-                <div id="youtube-player"></div>
-                <div class="direct-embed">
-                    <iframe src="https://www.youtube.com/embed/O1qMEdD2BhE?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=O1qMEdD2BhE&modestbranding=1&iv_load_policy=3&enablejsapi=1&vq=hd1080" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="video-overlay"></div>
-            </div>
-            <div class="hero-content glass-effect">
-                <h1><span class="highlight" data-text="Khám Phá">Khám Phá</span> Vẻ Đẹp Cố Đô <span class="highlight" data-text="Huế">Huế</span></h1>
-                <p>Thành phố di sản văn hóa thế giới với kiến trúc cung đình và ẩm thực tinh tế</p>
-                <a href="#destinations" class="btn">Khám Phá Ngay</a>
-            </div>
-        </section>
-
-        <!-- Destinations Section -->
-        <section id="destinations" class="section">
-            <div class="section-title glass-effect">
-                <h2>Điểm Đến Hấp Dẫn</h2>
-                <p>Khám phá những địa điểm nổi tiếng và di tích lịch sử của Huế</p>
-            </div>
-            <div class="cards-container">
-                <div class="card glass-effect">
-                    <div class="card-img" style="background-image: url('images/destinations/imperial-citadel.jpg');"></div>
-                    <div class="card-content">
-                        <h3>Kinh Thành Huế</h3>
-                        <p>Kinh thành Huế là quần thể di tích lịch sử và văn hóa nằm ở trung tâm thành phố Huế, được UNESCO công nhận là Di sản Văn hóa Thế giới.</p>
-                        <a href="#" class="btn popup-trigger" data-popup="popup-citadel">Khám phá</a>
-                    </div>
-                </div>
-                <div class="card glass-effect">
-                    <div class="card-img" style="background-image: url('images/destinations/thien-mu-pagoda.jpg');"></div>
-                    <div class="card-content">
-                        <h3>Chùa Thiên Mụ</h3>
-                        <p>Chùa Thiên Mụ hay còn gọi là chùa Linh Mụ, là một ngôi chùa cổ nằm trên đồi Hà Khê, tả ngạn sông Hương, cách trung tâm thành phố Huế khoảng 5 km về phía tây.</p>
-                        <a href="#" class="btn popup-trigger" data-popup="popup-pagoda">Khám phá</a>
-                    </div>
-                </div>
-                <div class="card glass-effect">
-                    <div class="card-img" style="background-image: url('images/destinations/perfume-river.jpg');"></div>
-                    <div class="card-content">
-                        <h3>Sông Hương</h3>
-                        <p>Sông Hương là một dòng sông chảy qua thành phố Huế, được mệnh danh là "dòng sông thi ca" với vẻ đẹp thơ mộng, trữ tình.</p>
-                        <a href="#" class="btn popup-trigger" data-popup="popup-river">Khám phá</a>
+    <div class="container">
+        <div class="maintenance-box">
+            <h1>ALI STUDIO</h1>
+            <div class="divider"></div>
+            <h2>Hệ Thống Đang Bảo Trì</h2>
+            <p>Chúng tôi đang nâng cấp hệ thống để mang đến trải nghiệm tốt hơn cho bạn.</p>
+            <p>Xin vui lòng quay lại sau!</p>
+            
+            <div class="maintenance-time">
+                <p>Thời gian bảo trì dự kiến hoàn thành:</p>
+                <div class="time-range">
+                    <div class="time-block">
+                        <span id="end-time">26/06/2025 - 14:00</span>
                     </div>
                 </div>
             </div>
-        </section>
+            
+            <div class="contact">
+                <p>Nếu cần hỗ trợ gấp, vui lòng liên hệ:</p>
+                <a href="mailto:support@alistudio.com">support@alistudio.com</a>
+            </div>
 
-        <!-- Cuisine Section -->
-        <section id="cuisine" class="section">
-            <div class="section-title glass-effect">
-                <h2>Ẩm Thực Huế</h2>
-                <p>Thưởng thức những món ăn đặc sản nổi tiếng của xứ Huế</p>
+            <!-- Chỉ báo mất kết nối hệ thống -->
+            <div id="system-status-indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v2m0 4h.01"></path><path d="M2.45 14.5A10.5 10.5 0 0 1 12 5.5a10.5 10.5 0 0 1 9.55 9"></path><path d="M12 20.5a10.5 10.5 0 0 1-9.55-9"></path><circle cx="12" cy="12" r="10.5"></circle></svg>
+                <span>Mất kết nối hệ thống</span>
             </div>
-            <div class="cards-container">
-                <div class="card glass-effect">
-                    <div class="card-img" style="background-image: url('images/cuisine/bun-bo-hue.jpg');"></div>
-                    <div class="card-content">
-                        <h3>Bún Bò Huế</h3>
-                        <p>Bún bò Huế là một món ăn đặc trưng của xứ Huế, với hương vị cay nồng, đậm đà từ sả, ớt và nước lèo được hầm từ xương bò.</p>
-                        <a href="#" class="btn popup-trigger" data-popup="popup-bunbo">Xem thêm</a>
-                    </div>
-                </div>
-                <div class="card glass-effect">
-                    <div class="card-img" style="background-image: url('images/cuisine/banh-khoai.jpg');"></div>
-                    <div class="card-content">
-                        <h3>Bánh Khoái</h3>
-                        <p>Bánh khoái là một loại bánh đặc sản của Huế, được làm từ bột gạo, trứng, tôm, thịt và các loại rau thơm.</p>
-                        <a href="#" class="btn popup-trigger" data-popup="popup-banhkhoai">Xem thêm</a>
-                    </div>
-                </div>
-                <div class="card glass-effect">
-                    <div class="card-img" style="background-image: url('images/cuisine/com-hen.jpg');"></div>
-                    <div class="card-content">
-                        <h3>Cơm Hến</h3>
-                        <p>Cơm hến là món ăn dân dã của người Huế, với thành phần chính là cơm nguội trộn với hến, rau sống và nước mắm cay.</p>
-                        <a href="#" class="btn popup-trigger" data-popup="popup-comhen">Xem thêm</a>
-                    </div>
-                </div>
-                <div class="card glass-effect">
-                    <div class="card-img" style="background-image: url('images/cuisine/banh-beo.jpg');"></div>
-                    <div class="card-content">
-                        <h3>Bánh Bèo</h3>
-                        <p>Bánh bèo là món bánh truyền thống của Huế, được làm từ bột gạo, ăn kèm với nước mắm chua ngọt và hành phi.</p>
-                        <a href="#" class="btn popup-trigger" data-popup="popup-banhbeo">Xem thêm</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Culture Section -->
-        <section id="culture" class="section">
-            <div class="section-title glass-effect">
-                <h2>Văn Hóa Huế</h2>
-                <p>Nét đẹp truyền thống trong cuộc sống hiện đại</p>
-            </div>
-            <div class="content-container glass-effect">
-                <div class="culture-content">
-                    <h3>Nhã Nhạc Cung Đình</h3>
-                    <p>Di sản văn hóa phi vật thể được UNESCO công nhận, là loại hình âm nhạc hoàng gia độc đáo.</p>
-                    
-                    <h3>Festival Huế</h3>
-                    <p>Sự kiện văn hóa lớn được tổ chức hai năm một lần, nơi hội tụ các giá trị văn hóa truyền thống và hiện đại.</p>
-                    
-                    <h3>Nghề Thủ Công Truyền Thống</h3>
-                    <p>Nhiều làng nghề truyền thống như làm nón lá, chạm bạc, dệt lụa vẫn được bảo tồn và phát triển.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="glass-effect">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Về Chúng Tôi</h3>
-                    <p>Chúng tôi yêu Huế và muốn giới thiệu vẻ đẹp của cố đô đến với du khách trong và ngoài nước.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Theo Dõi</h3>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/aliofficial17" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/khaiduy_22/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@AliStudio17" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Du Lịch Huế. Design by AliStudio.</p>
-            </div>
-        </footer>
+        </div>
     </div>
-
-    <!-- Popups -->
-    <div class="popup-overlay"></div>
+    <div id="bg-container"></div>
     
-    <!-- Kinh Thành Huế Popup -->
-    <div id="popup-citadel" class="popup">
-        <div class="popup-content glass-effect">
-            <span class="popup-close">&times;</span>
-            <h2>Kinh Thành Huế</h2>
-            <div class="popup-image">
-                <img src="images/destinations/imperial-citadel.jpg" alt="Kinh Thành Huế">
-            </div>
-            <div class="popup-text">
-                <p>Kinh thành Huế là quần thể di tích lịch sử và văn hóa nằm ở trung tâm thành phố Huế, được UNESCO công nhận là Di sản Văn hóa Thế giới vào năm 1993.</p>
-                <p>Được xây dựng từ năm 1805 đến năm 1832 dưới triều vua Gia Long và Minh Mạng, Kinh thành Huế là nơi sinh sống và làm việc của 13 vị vua triều Nguyễn, triều đại phong kiến cuối cùng của Việt Nam.</p>
-                <p>Kinh thành có chu vi 10km với hệ thống thành, hào, cửa thành kiên cố. Bên trong Kinh thành là Hoàng thành và Tử Cấm Thành - nơi vua và hoàng gia sinh sống.</p>
-                <p>Mặc dù đã bị tàn phá nặng nề trong chiến tranh, nhưng Kinh thành Huế vẫn giữ được nét đẹp cổ kính và là điểm tham quan không thể bỏ qua khi đến Huế.</p>
-                <h3>Thông tin tham quan:</h3>
-                <ul>
-                    <li><strong>Địa chỉ:</strong> Thành phố Huế, tỉnh Thừa Thiên Huế</li>
-                    <li><strong>Giờ mở cửa:</strong> 7:00 - 17:30 hàng ngày</li>
-                    <li><strong>Giá vé:</strong> 200.000 VNĐ/người lớn</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <!-- Nhạc nền ẩn, bắt đầu với chế độ tắt tiếng -->
+    <audio id="background-music" loop autoplay muted playsinline>
+        <source src="audio/background-music.mp3" type="audio/mp3">
+        Trình duyệt của bạn không hỗ trợ phát audio.
+    </audio>
     
-    <!-- Chùa Thiên Mụ Popup -->
-    <div id="popup-pagoda" class="popup">
-        <div class="popup-content glass-effect">
-            <span class="popup-close">&times;</span>
-            <h2>Chùa Thiên Mụ</h2>
-            <div class="popup-image">
-                <img src="images/destinations/thien-mu-pagoda.jpg" alt="Chùa Thiên Mụ">
-            </div>
-            <div class="popup-text">
-                <p>Chùa Thiên Mụ hay còn gọi là chùa Linh Mụ, là một ngôi chùa cổ nằm trên đồi Hà Khê, tả ngạn sông Hương, cách trung tâm thành phố Huế khoảng 5 km về phía tây.</p>
-                <p>Chùa được xây dựng vào năm 1601 dưới thời chúa Nguyễn Hoàng. Biểu tượng của chùa là Tháp Phước Duyên cao 7 tầng (21m), được xây dựng năm 1844 dưới triều vua Thiệu Trị.</p>
-                <p>Chùa Thiên Mụ không chỉ là một công trình kiến trúc tôn giáo đặc sắc mà còn là một di tích lịch sử quan trọng của Huế và Việt Nam.</p>
-                <p>Từ chùa, du khách có thể ngắm nhìn toàn cảnh sông Hương thơ mộng và khung cảnh thiên nhiên tuyệt đẹp xung quanh.</p>
-                <h3>Thông tin tham quan:</h3>
-                <ul>
-                    <li><strong>Địa chỉ:</strong> Đường Nguyễn Phúc Tần, phường Hương Long, thành phố Huế</li>
-                    <li><strong>Giờ mở cửa:</strong> 7:30 - 17:30 hàng ngày</li>
-                    <li><strong>Giá vé:</strong> Miễn phí</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Sông Hương Popup -->
-    <div id="popup-river" class="popup">
-        <div class="popup-content glass-effect">
-            <span class="popup-close">&times;</span>
-            <h2>Sông Hương</h2>
-            <div class="popup-image">
-                <img src="images/destinations/perfume-river.jpg" alt="Sông Hương">
-            </div>
-            <div class="popup-text">
-                <p>Sông Hương là một dòng sông chảy qua thành phố Huế, được mệnh danh là "dòng sông thi ca" với vẻ đẹp thơ mộng, trữ tình.</p>
-                <p>Sông Hương bắt nguồn từ dãy núi Trường Sơn, chảy qua thành phố Huế với chiều dài khoảng 30km trước khi đổ ra biển qua cửa Thuận An.</p>
-                <p>Dòng sông không chỉ là một phần không thể thiếu trong cảnh quan thiên nhiên của Huế mà còn gắn liền với lịch sử, văn hóa và đời sống của người dân nơi đây.</p>
-                <p>Du khách có thể thưởng ngoạn vẻ đẹp của sông Hương bằng cách đi thuyền trên sông, đặc biệt là vào buổi tối khi ánh đèn từ hai bờ sông phản chiếu xuống mặt nước tạo nên khung cảnh huyền ảo.</p>
-                <h3>Hoạt động trên sông:</h3>
-                <ul>
-                    <li><strong>Du thuyền nghe ca Huế:</strong> 100.000 - 300.000 VNĐ/thuyền</li>
-                    <li><strong>Thả đèn hoa đăng:</strong> 20.000 VNĐ/đèn</li>
-                    <li><strong>Thời gian lý tưởng:</strong> Chiều tối từ 18:00 - 21:00</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Bún Bò Huế Popup -->
-    <div id="popup-bunbo" class="popup">
-        <div class="popup-content glass-effect">
-            <span class="popup-close">&times;</span>
-            <h2>Bún Bò Huế</h2>
-            <div class="popup-image">
-                <img src="images/cuisine/bun-bo-hue.jpg" alt="Bún Bò Huế">
-            </div>
-            <div class="popup-text">
-                <p>Bún bò Huế là một món ăn đặc trưng của xứ Huế, với hương vị cay nồng, đậm đà từ sả, ớt và nước lèo được hầm từ xương bò.</p>
-                <p>Món ăn này có nguồn gốc từ cố đô Huế và đã trở thành một trong những món ăn đặc sản nổi tiếng nhất của ẩm thực Việt Nam.</p>
-                <p>Bún bò Huế khác với bún bò thông thường ở chỗ nước dùng có màu đỏ đặc trưng từ sả băm, ớt, và mắm ruốc. Nước dùng được nấu từ xương bò và giò heo trong nhiều giờ để lấy vị ngọt tự nhiên.</p>
-                <p>Một tô bún bò Huế đầy đủ sẽ có bún, thịt bò, giò heo, chả cua, huyết, và các loại rau sống như giá đỗ, rau muống chẻ, bắp chuối thái mỏng, rau thơm.</p>
-                <h3>Nơi thưởng thức:</h3>
-                <ul>
-                    <li><strong>Bún Bò Bà Mỹ:</strong> 11 Trương Định, Phú Hội, Thành phố Huế</li>
-                    <li><strong>Bún Bò Huế Hạnh:</strong> 11 Lý Thường Kiệt, Phú Hội, Thành phố Huế</li>
-                    <li><strong>Giá tham khảo:</strong> 35.000 - 50.000 VNĐ/tô</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Bánh Khoái Popup -->
-    <div id="popup-banhkhoai" class="popup">
-        <div class="popup-content glass-effect">
-            <span class="popup-close">&times;</span>
-            <h2>Bánh Khoái</h2>
-            <div class="popup-image">
-                <img src="images/cuisine/banh-khoai.jpg" alt="Bánh Khoái">
-            </div>
-            <div class="popup-text">
-                <p>Bánh khoái là một loại bánh đặc sản của Huế, được làm từ bột gạo, trứng, tôm, thịt và các loại rau thơm.</p>
-                <p>Bánh khoái có hình dáng giống bánh xèo nhưng nhỏ hơn và dày hơn. Bánh được chiên giòn với nhân gồm tôm, thịt heo, giá đỗ, và trứng gà hoặc trứng vịt.</p>
-                <p>Điểm đặc biệt của bánh khoái Huế là nước chấm đặc biệt được làm từ gan heo, tôm, đậu phộng rang giã nhỏ và các loại gia vị khác, tạo nên hương vị độc đáo không thể tìm thấy ở nơi khác.</p>
-                <p>Bánh khoái thường được ăn kèm với rau sống, húng quế, rau tía tô, và lá lốt, cuốn trong bánh tráng.</p>
-                <h3>Nơi thưởng thức:</h3>
-                <ul>
-                    <li><strong>Bánh Khoái Lạc Thiện:</strong> 6 Đinh Tiên Hoàng, Phú Hội, Thành phố Huế</li>
-                    <li><strong>Bánh Khoái Hồng Mai:</strong> 13 Hùng Vương, Phú Nhuận, Thành phố Huế</li>
-                    <li><strong>Giá tham khảo:</strong> 25.000 - 35.000 VNĐ/đĩa</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Cơm Hến Popup -->
-    <div id="popup-comhen" class="popup">
-        <div class="popup-content glass-effect">
-            <span class="popup-close">&times;</span>
-            <h2>Cơm Hến</h2>
-            <div class="popup-image">
-                <img src="images/cuisine/com-hen.jpg" alt="Cơm Hến">
-            </div>
-            <div class="popup-text">
-                <p>Cơm hến là món ăn dân dã của người Huế, với thành phần chính là cơm nguội trộn với hến, rau sống và nước mắm cay.</p>
-                <p>Hến là một loại nhuyễn thể nước ngọt sống ở đáy sông Hương. Sau khi thu hoạch, hến được đem về tách lấy thịt, luộc chín và trộn với nhiều loại gia vị.</p>
-                <p>Một đĩa cơm hến đầy đủ gồm có cơm nguội, thịt hến xào, nước hến, đậu phộng rang giã nhỏ, rau thơm, bắp chuối thái mỏng, ớt, hành phi, tóp mỡ và nước mắm chua ngọt.</p>
-                <p>Cơm hến có hương vị đặc biệt: chua, cay, mặn, ngọt hòa quyện vào nhau tạo nên một món ăn đậm đà, hấp dẫn và rất riêng của xứ Huế.</p>
-                <h3>Nơi thưởng thức:</h3>
-                <ul>
-                    <li><strong>Cơm Hến Bà Cam:</strong> 19 Phạm Hồng Thái, Vĩnh Ninh, Thành phố Huế</li>
-                    <li><strong>Cơm Hến Hoa Đông:</strong> Kiệt 104/47 Chi Lăng, Phú Cát, Thành phố Huế</li>
-                    <li><strong>Giá tham khảo:</strong> 15.000 - 25.000 VNĐ/đĩa</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Bánh Bèo Popup -->
-    <div id="popup-banhbeo" class="popup">
-        <div class="popup-content glass-effect">
-            <span class="popup-close">&times;</span>
-            <h2>Bánh Bèo</h2>
-            <div class="popup-image">
-                <img src="images/cuisine/banh-beo.jpg" alt="Bánh Bèo">
-            </div>
-            <div class="popup-text">
-                <p>Bánh bèo là món bánh truyền thống của Huế, được làm từ bột gạo, ăn kèm với nước mắm chua ngọt và hành phi.</p>
-                <p>Bánh có hình tròn, dẹt, giống như lá bèo nổi trên mặt nước nên được gọi là bánh bèo. Bánh được hấp chín trong những chiếc chén nhỏ bằng sứ.</p>
-                <p>Trên mặt bánh có một lớp nhân làm từ tôm xay nhỏ, hành phi thơm và bột tôm. Khi ăn, người ta rưới lên bánh một ít nước mắm chua ngọt pha với ớt.</p>
-                <p>Bánh bèo Huế thường được bày trong những chiếc đĩa lớn, mỗi đĩa có khoảng 8-10 chén nhỏ. Người Huế thường dùng đũa tre nhỏ để gắp bánh từ chén ra ăn.</p>
-                <h3>Nơi thưởng thức:</h3>
-                <ul>
-                    <li><strong>Bánh Bèo Nam Phổ:</strong> 11 Phó Đức Chính, Phú Hội, Thành phố Huế</li>
-                    <li><strong>Bánh Bèo Bà Đỏ:</strong> 8 Nguyễn Bỉnh Khiêm, Phú Cát, Thành phố Huế</li>
-                    <li><strong>Giá tham khảo:</strong> 25.000 - 35.000 VNĐ/đĩa</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Chatbox -->
-    <button class="chatbox-toggle">
-        <i class="fas fa-comment-dots"></i>
-    </button>
-    <div class="chatbox-container">
-        <div class="chatbox-header">
-            Hỗ Trợ Trực Tuyến
-        </div>
-        <div class="chatbox-messages">
-            <!-- Messages will be injected here by JavaScript -->
-        </div>
-        <div class="quick-replies">
-            <!-- Quick replies will be injected here -->
-        </div>
-        <div class="chatbox-input">
-            <input type="text" placeholder="Nhập tin nhắn của bạn...">
-            <button><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html> 

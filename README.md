@@ -1,68 +1,54 @@
-# Hue Tourism & Cuisine Website
+# Trang Bảo Trì 3D - ALI STUDIO
 
-A modern, responsive website showcasing the beauty of Hue city in Vietnam, featuring its historical sites and traditional cuisine. Built with a modern glass morphism UI design.
+Trang bảo trì tương tác với hiệu ứng 3D đẹp mắt được xây dựng bằng HTML, CSS và Three.js.
 
-## Features
+## Tính năng
 
-- Modern liquid glass design with smooth transitions
-- Responsive layout that works on mobile, tablet, and desktop
-- Loading screen animation
-- Smooth scrolling navigation
-- Image gallery with lightbox effect
-- Reveal animations on scroll
-- Mobile-friendly navigation menu
+- Thiết kế responsive hoạt động trên mọi thiết bị
+- Nền 3D tương tác với các hình cầu và ngôi sao
+- Đồng hồ đếm ngược hiển thị thời gian hệ thống sẽ hoạt động trở lại
+- Giao diện hiện đại với hiệu ứng glass-morphism
+- Hiệu ứng chuyển động mượt mà
 
-## Technologies Used
+## Cài đặt
 
-- HTML5
-- CSS3 with modern features:
-  - CSS Variables
-  - Flexbox & Grid
-  - Backdrop-filter for glass effect
-  - CSS Animations
-- JavaScript (Vanilla JS)
-- Font Awesome icons
-- Google Fonts
+1. Tải xuống hoặc clone repository này
+2. Mở file `index.html` trong trình duyệt web
 
-## Project Structure
+Không cần quy trình build. Đây là một trang web tĩnh đơn giản chạy trực tiếp trên trình duyệt.
 
-```
-hue-tourism-website/
-├── css/
-│   └── styles.css
-├── js/
-│   └── script.js
-├── images/
-│   ├── (Place image files here)
-│   └── ...
-└── index.html
+## Tùy chỉnh
+
+### Thay đổi thời gian đếm ngược
+
+Mở file `js/main.js` và chỉnh sửa thời gian đếm ngược ở đầu file:
+
+```javascript
+// Thay đổi số ngày bảo trì
+const countDownDate = new Date();
+countDownDate.setDate(countDownDate.getDate() + 3); // Thay đổi số 3 thành số ngày mong muốn
 ```
 
-## Getting Started
+### Thay đổi màu sắc
 
-1. Download or clone the repository
-2. Add your images to the `images` folder:
-   - Required images:
-     - hue-panorama.jpg (for hero section background)
-     - imperial-citadel.jpg (for destinations section)
-     - thien-mu-pagoda.jpg (for destinations section)
-     - tomb-minh-mang.jpg (for destinations section)
-     - bun-bo-hue.jpg (for cuisine section)
-     - banh-khoai.jpg (for cuisine section)
-     - che-hue.jpg (for cuisine section)
-     - gallery1.jpg through gallery6.jpg (for gallery section)
-3. Open `index.html` in your browser to view the website
+Các màu chính có thể được sửa đổi trong file `css/styles.css`. Tìm các mã màu như `#ff6b6b` và `#ff9e80`.
 
-## Browser Compatibility
+### Thay đổi nội dung văn bản
 
-This website uses modern CSS and JavaScript features and is compatible with:
+Chỉnh sửa văn bản trong file `index.html` để tùy chỉnh thông báo bảo trì.
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Chrome for Android and iOS Safari
+## Thư viện sử dụng
 
-## License
+- [Three.js](https://threejs.org/) - Thư viện JavaScript 3D
 
-This project is available for personal and commercial use. 
+## Tương thích trình duyệt
+
+Trang bảo trì này hoạt động trên tất cả các trình duyệt hiện đại hỗ trợ WebGL:
+- Chrome
+- Firefox
+- Safari
+- Edge
+
+## Giấy phép
+
+Bạn có thể tự do sử dụng template này cho trang bảo trì website của mình. 
