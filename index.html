@@ -1,63 +1,200 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang='vi'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALI STUDIO - Bảo Trì Hệ Thống</title>
-    <link rel="stylesheet" href="./css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Preload audio để tăng khả năng tự động phát -->
-    <link rel="preload" href="./audio/background-music.mp3" as="audio">
-    <!-- Thêm meta tag để cho phép tự động phát media -->
-    <meta name="autoplay-policy" content="no-user-gesture-required">
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Khám phá Du lịch Huế</title>
+  <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap' rel='stylesheet'>
+  <link rel='stylesheet' href='css/style.css'>
 </head>
 <body>
-    <div id="preloader">
-        <div class="loader-text">ALI STUDIO</div>
-        <div class="loader-bar">
-            <div class="loader-progress"></div>
-        </div>
-        <div class="loader-subtext">Đang tải tài nguyên...</div>
-        <button id="enter-button" class="enter-btn hidden">Truy Cập</button>
+  <!-- Preloader -->
+  <div id='preloader'>
+    <div class='loader'>
+      <div id='loader-text-container'>
+        <!-- Words will be generated here by JS -->
+      </div>
+      <div class='loader-bar'>
+        <div class='loader-progress'></div>
+      </div>
     </div>
+  </div>
 
-    <div class="container">
-        <div class="maintenance-box">
-            <h1>ALI STUDIO</h1>
-            <div class="divider"></div>
-            <h2>Hệ Thống Đang Bảo Trì</h2>
-            <p>Chúng tôi đang nâng cấp hệ thống để mang đến trải nghiệm tốt hơn cho bạn.</p>
-            <p>Xin vui lòng quay lại sau!</p>
-            
-            <div class="maintenance-time">
-                <p>Thời gian bảo trì dự kiến hoàn thành:</p>
-                <div class="time-range">
-                    <div class="time-block">
-                        <span id="end-time">26/06/2025 - 14:00</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="contact">
-                <p>Nếu cần hỗ trợ gấp, vui lòng liên hệ:</p>
-                <a href="mailto:support@alistudio.com">support@alistudio.com</a>
-            </div>
+  <!-- Main Content -->
+  <div id='content' class='hidden'>
+    <!-- Navbar -->
+    <header class='navbar'>
+      <div class='container'>
+        <a href='#' class='logo'>Du lịch Huế</a>
+            <nav>
+          <ul class='nav-links'>
+            <li><a href='#hero'>Trang chủ</a></li>
+            <li><a href='#about'>Giới thiệu</a></li>
+            <li><a href='#attractions'>Điểm đến</a></li>
+            <li><a href='#cuisine'>Ẩm thực</a></li>
+            <li><a href='#videos'>Videos</a></li>
+            <li><a href='#contact'>Liên hệ</a></li>
+                </ul>
+            </nav>
+        <button id='theme-toggle' title='Toggle theme'>
+          <svg class='sun-icon' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='5'></circle><line x1='12' y1='1' x2='12' y2='3'></line><line x1='12' y1='21' x2='12' y2='23'></line><line x1='4.22' y1='4.22' x2='5.64' y2='5.64'></line><line x1='18.36' y1='18.36' x2='19.78' y2='19.78'></line><line x1='1' y1='12' x2='3' y2='12'></line><line x1='21' y1='12' x2='23' y2='12'></line><line x1='4.22' y1='19.78' x2='5.64' y2='18.36'></line><line x1='18.36' y1='5.64' x2='19.78' y2='4.22'></line></svg>
+          <svg class='moon-icon' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path></svg>
+        </button>
+      </div>
+        </header>
 
-            <!-- Chỉ báo mất kết nối hệ thống -->
-            <div id="system-status-indicator">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v2m0 4h.01"></path><path d="M2.45 14.5A10.5 10.5 0 0 1 12 5.5a10.5 10.5 0 0 1 9.55 9"></path><path d="M12 20.5a10.5 10.5 0 0 1-9.55-9"></path><circle cx="12" cy="12" r="10.5"></circle></svg>
-                <span>Mất kết nối hệ thống</span>
-            </div>
+    <!-- Hero Section -->
+    <section id='hero' class='hero'>
+      <div class='video-background'>
+        <iframe 
+            src='https://www.youtube.com/embed/UHm4KO8d7Is?autoplay=1&mute=1&loop=1&playlist=UHm4KO8d7Is&controls=0&showinfo=0&rel=0&vq=hd2160' 
+            frameborder='0' 
+            allow='autoplay; encrypted-media' 
+            allowfullscreen>
+        </iframe>
+      </div>
+      <div class='container'>
+        <h1>Khám phá vẻ đẹp Huế</h1>
+        <p>Hành trình văn hóa và di sản Cố đô</p>
+        <a href='#attractions' class='btn'>Tìm hiểu ngay</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id='about' class='about section'>
+      <div class='container'>
+        <h2>Giới thiệu về Huế</h2>
+        <p>Huế, cố đô của Việt Nam dưới triều đại nhà Nguyễn, là một thành phố mang trong mình vẻ đẹp trầm mặc và cổ kính. Nằm bên dòng sông Hương thơ mộng, Huế không chỉ là trung tâm của di sản kiến trúc cung đình, đền đài, lăng tẩm mà còn là cái nôi của nền văn hóa và ẩm thực tinh tế. Đến với Huế là tìm về một không gian yên bình, nơi nhịp sống chậm rãi và con người hiền hòa, mến khách, hứa hẹn một hành trình khám phá đầy ý nghĩa.</p>
+      </div>
+    </section>
+
+    <!-- Attractions Section -->
+    <section id='attractions' class='attractions section'>
+      <div class='container'>
+        <h2>Điểm đến nổi bật</h2>
+        <div class='grid'>
+          <div class='card modal-trigger' data-title='Đại Nội Huế' data-img-src='images/citadel.jpg' data-description='Đại Nội Huế là trung tâm chính trị và hành chính của triều đình Nguyễn, bao gồm Hoàng Thành và Tử Cấm Thành. Đây là một công trình kiến trúc đồ sộ với hàng trăm công trình lớn nhỏ, biểu trưng cho quyền uy của triều đại phong kiến cuối cùng ở Việt Nam.' data-details='<strong>Giá vé tham khảo:</strong> 200.000 VNĐ/người lớn.<br><strong>Giờ mở cửa:</strong> 07:00 - 17:30'>
+            <img src='images/citadel.jpg' alt='Đại Nội Huế'>
+            <h3>Đại Nội Huế</h3>
+            <p>Di tích kinh thành xưa với kiến trúc độc đáo và bề dày lịch sử.</p>
+          </div>
+          <div class='card modal-trigger' data-title='Chùa Thiên Mụ' data-img-src='images/thien-mu.jpg' data-description='Còn gọi là chùa Linh Mụ, ngôi chùa cổ nằm trên đồi Hà Khê, tả ngạn sông Hương. Với vẻ đẹp cổ kính và sự tích linh thiêng, chùa Thiên Mụ là biểu tượng không thể tách rời của thành phố Huế.' data-details='<strong>Giá vé tham khảo:</strong> Miễn phí.<br><strong>Giờ mở cửa:</strong> Cả ngày.'>
+            <img src='images/thien-mu.jpg' alt='Chùa Thiên Mụ'>
+            <h3>Chùa Thiên Mụ</h3>
+            <p>Ngôi chùa cổ linh thiêng nhìn ra sông Hương thơ mộng.</p>
+          </div>
+          <div class='card modal-trigger' data-title='Lăng Tự Đức' data-img-src='images/tomb.jpg' data-description='Lăng Tự Đức (Khiêm Lăng) là một trong những công trình đẹp nhất của kiến trúc cung đình thời Nguyễn. Nơi đây có phong cảnh sơn thủy hữu tình và được coi là một công viên rộng lớn, nơi nhà vua đến nghỉ ngơi.' data-details='<strong>Giá vé tham khảo:</strong> 150.000 VNĐ/người lớn.<br><strong>Giờ mở cửa:</strong> 07:00 - 17:30'>
+            <img src='images/tomb.jpg' alt='Lăng Tự Đức'>
+            <h3>Lăng Tự Đức</h3>
+            <p>Lăng mộ cổ kính giữa khung cảnh thiên nhiên hữu tình.</p>
+          </div>
+          <div class='card modal-trigger' data-title='Sông Hương' data-img-src='images/perfume-river.jpg' data-description='Dòng sông hiền hòa chảy qua lòng thành phố Huế, mang vẻ đẹp thơ mộng, lãng mạn và là nguồn cảm hứng bất tận cho thi ca, nhạc họa. Du thuyền trên sông Hương là một trải nghiệm không thể bỏ lỡ.' data-details='<strong>Gợi ý trải nghiệm:</strong> Du thuyền nghe ca Huế trên sông Hương.<br><strong>Giá vé tham khảo:</strong> Khoảng 150.000 - 200.000 VNĐ/khách.'>
+            <img src='images/perfume-river.jpg' alt='Sông Hương'>
+            <h3>Sông Hương</h3>
+            <p>Biểu tượng thơ mộng, chảy qua trung tâm thành phố.</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Cuisine Section -->
+    <section id='cuisine' class='cuisine section'>
+      <div class='container'>
+        <h2>Ẩm thực đặc sắc</h2>
+        <div class='grid'>
+          <div class='card modal-trigger' data-title='Bún bò Huế' data-img-src='images/bun-bo-hue.jpg' data-description='Là một trong những đặc sản nổi tiếng nhất, bún bò Huế chinh phục thực khách bằng nước dùng đậm đà, vị cay nồng đặc trưng của sả và ớt, cùng các loại nguyên liệu phong phú như thịt bò, chả cua, và huyết.' data-details='<strong>Địa chỉ gợi ý:</strong><br>- Bún bò Mệ Kéo: 20 Bạch Đằng<br>- Bún bò O Cương Chú Điệp: 6 Trần Thúc Nhẫn'>
+            <img src='images/bun-bo-hue.jpg' alt='Bún bò Huế'>
+            <h3>Bún bò Huế</h3>
+            <p>Món ăn nổi tiếng với vị cay đậm đà, nước dùng thơm ngọt.</p>
+          </div>
+          <div class='card modal-trigger' data-title='Cơm hến' data-img-src='images/com-hue.jpg' data-description='Một món ăn dân dã nhưng cực kỳ độc đáo. Cơm hến là sự hòa quyện giữa cơm trắng nguội, hến xào, mắm ruốc, tóp mỡ, và các loại rau sống, tạo nên một hương vị cay, nồng, khó quên.' data-details='<strong>Địa chỉ gợi ý:</strong><br>- Cơm hến Hoa Đông: 64 Kiệt 7 Ưng Bình<br>- Quán Nhỏ: 28 Phạm Hồng Thái'>
+            <img src='images/com-hue.jpg' alt='Cơm hến'>
+            <h3>Cơm hến</h3>
+            <p>Món ăn dân dã phối hợp hài hòa giữa hến, cơm và gia vị.</p>
+          </div>
+          <div class='card modal-trigger' data-title='Bánh ướt thịt nướng' data-img-src='images/banh-uot.jpg' data-description='Bánh ướt mềm mại, mỏng tang, được cuốn cùng với thịt nướng thơm lừng, đậm vị, chấm với nước mắm chua ngọt đặc trưng. Đây là món ăn vặt được yêu thích bởi cả người dân địa phương và du khách.' data-details='<strong>Địa chỉ gợi ý:</strong><br>- Quán Huyền Anh: 52/1 Kim Long<br>- Quán Tài Phú: 02 Điện Biên Phủ'>
+            <img src='images/banh-uot.jpg' alt='Bánh ướt thịt nướng'>
+            <h3>Bánh ướt thịt nướng</h3>
+            <p>Bánh mềm, thơm cùng thịt nướng đậm vị.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id='videos' class='videos section'>
+      <div class='container'>
+        <h2>Khám phá Huế qua Video</h2>
+        <div class='grid'>
+          <div class='video-container'>
+            <iframe src='https://www.youtube.com/embed/UHm4KO8d7Is' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+          </div>
+          <div class='video-container'>
+            <iframe src='https://www.youtube.com/embed/eUEBTU9gjCc' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+          </div>
+          <div class='video-container'>
+            <iframe src='https://www.youtube.com/embed/ivx7EAHMV7g' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id='contact' class='contact section'>
+      <div class='container'>
+        <h2>Liên hệ</h2>
+        <p>Bạn cần hỗ trợ hoặc đặt tour? Hãy liên hệ với chúng tôi:</p>
+        <p>Email: khaiduy2k2@gmail.com | Hotline: Coming Soon</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class='footer'>
+      <div class='container'>
+        <p>© 2025 Du lịch Huế. Design by Ali Studio.</p>
+            </div>
+        </footer>
+  </div>
+
+  <!-- Content Modal -->
+  <div id='content-modal' class='modal-backdrop'>
+    <div class='modal-content'>
+      <button id='modal-close-button' class='modal-close'>&times;</button>
+      <img id='modal-image' src='' alt=''>
+      <h2 id='modal-title'></h2>
+      <p id='modal-description'></p>
+      <div id='modal-details' class='modal-details'></div>
     </div>
-    <div id="bg-container"></div>
-    
-    <!-- Nhạc nền ẩn, bắt đầu với chế độ tắt tiếng -->
-    <audio id="background-music" loop autoplay muted playsinline>
-        <source src="./audio/background-music.mp3" type="audio/mp3">
-        Trình duyệt của bạn không hỗ trợ phát audio.
-    </audio>
-    
-    <script src="./js/main.js"></script>
+  </div>
+
+  <!-- Chatbox Popup -->
+  <button id='chat-toggle-button'>
+    <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'></path></svg>
+  </button>
+
+  <div id='chat-popup' class='chat-popup'>
+    <div class='chat-header'>
+      <h3>Gửi tin nhắn cho chúng tôi</h3>
+      <button id='chat-close-button'>&times;</button>
+    </div>
+    <div class='chat-body'>
+      <form id='contact-form' action='https://formspree.io/f/YOUR_FORM_ID' method='POST'>
+        <input type='text' name='name' placeholder='Tên của bạn' required>
+        <input type='email' name='email' placeholder='Email của bạn' required>
+        <textarea name='message' placeholder='Nhập tin nhắn...' required></textarea>
+        <button type='submit'>Gửi</button>
+      </form>
+      <div class='chat-notice'>
+        <p>This form is powered by <b>Formspree</b>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="offline-indicator">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+    <span>Bạn đang ngoại tuyến. Một số chức năng có thể không hoạt động.</span>
+  </div>
+
+  <script src='js/main.js'></script>
 </body>
 </html> 
